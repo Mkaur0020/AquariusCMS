@@ -1,0 +1,1618 @@
+/* input[type="password"] {
+  color: transparent;
+} */
+
+#map-canvas {
+    /* position: relative; */
+    /* overflow: hidden; */
+    display: block;
+    /* float: right; */
+    position: absolute;
+    width: 84%;
+    height: 300px;
+    overflow: hidden;
+    bottom: -308px;
+    display: none;
+}
+
+nav {
+    position: fixed !important;
+    width: 100%;
+    top: 0px;
+    z-index: 99;
+}
+
+.loading {
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: #000;
+    z-index: 9999;
+    opacity: 0.5;
+}
+
+.spinner {
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    font-size: 10px;
+    position: absolute;
+    z-index: 999;
+    margin: auto;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.spinner > div {
+    background-color: #5cb85c;
+    height: 100%;
+    width: 6px;
+    display: inline-block;
+
+    -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+    0%,
+    40%,
+    100% {
+        -webkit-transform: scaleY(0.4)
+    }
+    20% {
+        -webkit-transform: scaleY(1.0)
+    }
+}
+
+@keyframes sk-stretchdelay {
+    0%,
+    40%,
+    100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+    }
+    20% {
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+    }
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+/*//////////////////////////////////////////////////////////////////
+[ RESTYLE TAG ]*/
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100%;
+    font-family: Poppins-Regular, sans-serif;
+}
+
+/*---------------------------------------------*/
+
+a {
+    font-family: Poppins-Regular;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #666666;
+    margin: 0px;
+    transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+}
+
+a:focus {
+    outline: none !important;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #57b846;
+}
+
+/*---------------------------------------------*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0px;
+}
+
+p {
+    font-family: Poppins-Regular;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #666666;
+    margin: 0px;
+}
+
+ul,
+li {
+    margin: 0px;
+    list-style-type: none;
+}
+
+
+/*---------------------------------------------*/
+
+input {
+    outline: none;
+    border: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+textarea {
+    outline: none;
+    border: none;
+}
+
+
+
+input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+input:focus:-moz-placeholder {
+    color: transparent;
+}
+
+input:focus::-moz-placeholder {
+    color: transparent;
+}
+
+input:focus:-ms-input-placeholder {
+    color: transparent;
+}
+
+textarea:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+textarea:focus:-moz-placeholder {
+    color: transparent;
+}
+
+textarea:focus::-moz-placeholder {
+    color: transparent;
+}
+
+textarea:focus:-ms-input-placeholder {
+    color: transparent;
+}
+
+input::-webkit-input-placeholder {
+    color: #999999;
+}
+
+input:-moz-placeholder {
+    color: #999999;
+}
+
+input::-moz-placeholder {
+    color: #999999;
+}
+
+input:-ms-input-placeholder {
+    color: #999999;
+}
+
+textarea::-webkit-input-placeholder {
+    color: #999999;
+}
+
+textarea:-moz-placeholder {
+    color: #999999;
+}
+
+textarea::-moz-placeholder {
+    color: #999999;
+}
+
+textarea:-ms-input-placeholder {
+    color: #999999;
+}
+
+label {
+    display: block;
+    margin: 0;
+}
+
+/*---------------------------------------------*/
+
+button {
+    outline: none !important;
+    border: none;
+    background: transparent;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+iframe {
+    border: none !important;
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ Utility ]*/
+
+.txt1 {
+    font-family: Poppins-Regular;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #999999;
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ login ]*/
+
+.limiter {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.container-login100 {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: #ebeeef;
+}
+
+
+.wrap-login100 {
+    width: 670px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+/*==================================================================
+[ Title form ]*/
+
+.login100-form-title {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    padding: 70px 15px 74px 15px;
+}
+
+.login100-form-title-1 {
+    font-family: Poppins-Bold;
+    font-size: 30px;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.login100-form-title::before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(54, 84, 99, 0.7);
+}
+
+
+/*==================================================================
+[ Form ]*/
+
+.login100-form {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 43px 88px 93px 190px;
+}
+
+
+/*------------------------------------------------------------------
+[ Input ]*/
+
+.wrap-input100 {
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #b2b2b2;
+}
+
+.label-input100 {
+    font-family: Poppins-Regular;
+    font-size: 15px;
+    color: #808080;
+    line-height: 1.2;
+    text-align: right;
+
+    position: absolute;
+    top: 14px;
+    left: -105px;
+    width: 80px;
+
+}
+
+/*---------------------------------------------*/
+
+.input100 {
+    font-family: Poppins-Regular;
+    font-size: 15px;
+    color: #555555;
+    line-height: 1.2;
+
+    display: block;
+    width: 100%;
+    background: transparent;
+    padding: 0 5px;
+}
+
+.focus-input100 {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.focus-input100::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 1px;
+
+    -webkit-transition: all 0.6s;
+    -o-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+    transition: all 0.6s;
+
+    background: #57b846;
+}
+
+
+/*---------------------------------------------*/
+
+input.input100 {
+    height: 45px;
+}
+
+
+.input100:focus + .focus-input100::before {
+    width: 100%;
+}
+
+.has-val.input100 + .focus-input100::before {
+    width: 100%;
+}
+
+/*==================================================================
+[ Restyle Checkbox ]*/
+
+.input-checkbox100 {
+    display: none;
+}
+
+.label-checkbox100 {
+    font-family: Poppins-Regular;
+    font-size: 13px;
+    color: #999999;
+    line-height: 1.4;
+
+    display: block;
+    position: relative;
+    padding-left: 26px;
+    cursor: pointer;
+}
+
+.label-checkbox100::before {
+    content: "\f00c";
+    font-family: FontAwesome;
+    font-size: 13px;
+    color: transparent;
+
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 2px;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    left: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.input-checkbox100:checked + .label-checkbox100::before {
+    color: #57b846;
+}
+
+/*------------------------------------------------------------------
+[ Button ]*/
+
+.container-login100-form-btn {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.login100-form-btn {
+    margin-right: 20px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    min-width: 160px;
+    height: 50px;
+    background-color: #57b846;
+    border-radius: 25px;
+
+    font-family: Poppins-Regular;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.login100-form-btn:hover {
+    background-color: #333333;
+}
+
+
+/*------------------------------------------------------------------
+[ Responsive ]*/
+
+@media (max-width: 576px) {
+    .login100-form {
+        padding: 43px 15px 57px 117px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login100-form {
+        padding: 43px 15px 57px 15px;
+    }
+
+    .label-input100 {
+        text-align: left;
+        position: unset;
+        top: unset;
+        left: unset;
+        width: 100%;
+        padding: 0 5px;
+    }
+}
+
+
+/*------------------------------------------------------------------
+[ Alert validate ]*/
+
+.validate-input {
+    position: relative;
+}
+
+.alert-validate::before {
+    content: attr(data-validate);
+    position: absolute;
+    max-width: 70%;
+    background-color: #fff;
+    border: 1px solid #c80000;
+    border-radius: 2px;
+    padding: 4px 25px 4px 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 2px;
+    pointer-events: none;
+
+    font-family: Poppins-Medium;
+    color: #c80000;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: left;
+
+    visibility: hidden;
+    opacity: 0;
+
+    -webkit-transition: opacity 0.4s;
+    -o-transition: opacity 0.4s;
+    -moz-transition: opacity 0.4s;
+    transition: opacity 0.4s;
+}
+
+.alert-validate::after {
+    content: "\f06a";
+    font-family: FontAwesome;
+    display: block;
+    position: absolute;
+    color: #c80000;
+    font-size: 15px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 8px;
+}
+
+.alert-validate:hover:before {
+    visibility: visible;
+    opacity: 1;
+}
+
+@media (max-width: 992px) {
+    .alert-validate::before {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+
+body {
+    background: #ebeeef;
+}
+
+.card {
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    display: block;
+    width: 85%;
+    position: relative;
+    margin: 5% auto 0%;
+    background: #fff;
+    padding-top: 15px;
+}
+
+.card h4 {
+    margin: 0px 0px 25px 60px;
+    font-size: 24px;
+    white-space: nowrap;
+    height: 30px;
+    width: 8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card img {
+    border-radius: 50%;
+    position: absolute;
+    top: -60px;
+    left: -60px;
+    cursor: pointer;
+    z-index: 9;
+}
+
+#table {
+    display: inline-block;
+    width: 100%;
+}
+
+.tableDataHead {
+    background-color: #ccc;
+}
+
+.tableDataHead .tableCol {
+    height: 40px;
+}
+
+.tableCol {
+    width: 11.11%;
+    float: left;
+    padding: 10px 0px;
+    text-align: center;
+    display: inline-block;
+    height: auto;
+    font-size: 12px;
+}
+
+.tableDataHead {
+    display: inline-block;
+    width: 100%;
+    float: left;
+    border-top: 2px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.tableData {
+    display: inline-block;
+    width: 100%;
+}
+
+.tableData .tableCol {
+    padding: 8px 0px;
+}
+
+.navbar {
+    border-radius: 0px;
+}
+
+.addApptBtn {
+    float: right;
+    position: absolute;
+    top: 15px;
+    right: 125px;
+}
+
+.notificationBtn {
+    float: right;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+}
+
+/* Full-width input fields */
+
+#id01 input[type=text],
+#id01 input[type=password] {
+    width: 100%;
+    padding: 8px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+
+#id01 button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+#id01 button:hover {
+    opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+
+#id01 .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+#id01 textarea {
+    width: 100%;
+    padding: 8px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#id01 input[type=date],
+#id01 input[type=time] {
+    width: 100%;
+    padding: 8px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#id01 label {
+    width: 50%;
+}
+
+#id01 .timeDiv {
+    display: inline-block;
+    width: 49%;
+}
+
+/* Center the image and position the close button */
+
+#id01 .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+    font-size: 26px;
+}
+
+#id01 img.avatar {
+    width: 50px;
+    border-radius: 50%;
+}
+
+#id01 .container {
+    padding: 10px;
+    width: 100%;
+}
+
+#id01 span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* The Modal (background) */
+
+#id01 .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+
+#id01 .modal-content {
+    background-color: #fefefe;
+    margin: 0px auto;
+    border: 1px solid #888;
+    width: 70%;
+}
+
+/* The Close Button (x) */
+
+#id01 .close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+#id01 .close:hover,
+#id01 .close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+
+#id01 .animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+/* Change styles for span and cancel button on extra small screens */
+
+@media screen and (max-width: 300px) {
+    #id01 span.psw {
+        display: block;
+        float: none;
+    }
+    #id01 .cancelbtn {
+        width: 100%;
+    }
+}
+
+#id01 textarea:focus,
+#id01 input:focus {
+    border-color: #ccc !important;
+}
+
+.adminInfo {
+    position: absolute;
+    right: 0px;
+    color: #fff;
+    top: 0px;
+    cursor: pointer;
+}
+
+.adminInfo img {
+    margin-right: 10px;
+}
+
+.tableData .data {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+}
+
+.tableData .data:hover {
+    cursor: pointer;
+    background-color: #222;
+    color: #fff;
+}
+
+#table .tableData .tableCol input[type="text"]:disabled {
+    width: 90%;
+    height: 30px;
+    display: block;
+    margin: 0px auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: transparent;
+    margin-bottom: 1px;
+    text-align: center;
+}
+
+#table .tableData .tableCol input[type="date"]:disabled {
+    width: 100%;
+    height: 30px;
+    display: block;
+    margin: 0px auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: transparent;
+    margin-bottom: 1px;
+    text-align: center;
+}
+
+#table .tableData .tableCol input[type="time"]:disabled {
+    width: 90%;
+    height: 30px;
+    display: block;
+    margin: 0px auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: transparent;
+    margin-bottom: 1px;
+    text-align: center;
+}
+
+#table .tableData .tableCol input[type="text"]:enabled {
+    width: 90%;
+    height: 30px;
+    display: block;
+    margin-bottom: 1px;
+    margin: 2px auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+}
+
+#table .tableData .tableCol input[type="date"]:enabled {
+    width: 90%;
+    height: 30px;
+    display: block;
+    margin-bottom: 1px;
+    margin: 2px auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+}
+
+#table .tableData .tableCol input[type="time"]:enabled {
+    width: 90%;
+    height: 30px;
+    display: block;
+    margin-bottom: 1px;
+    margin: 2px auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+}
+
+input[type="date"] {
+    position: relative;
+    padding: 10px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: transparent;
+    background: none;
+    z-index: 1;
+}
+
+input[type="date"]:before {
+    color: transparent;
+    background: none;
+    display: block;
+    font-family: 'FontAwesome';
+    content: '\f073';
+    /* This is the calendar icon in FontAwesome */
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 8px;
+    right: 5px;
+    color: #999;
+}
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+.doneDataBtn {
+    display: none;
+}
+
+#searchWorker {
+    margin: auto;
+    display: block;
+    position: absolute;
+    height: 35px;
+    width: 150px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding-left: 10px;
+}
+
+.tableData h4 {
+    border-bottom: 1px solid #ccc;
+    padding: 5px 15px;
+}
+
+.card h3 {
+    display: inline-block;
+}
+
+.card .searchClient {
+    position: absolute;
+    width: 200px;
+    border: 1px solid #ccc;
+    height: 35px;
+    margin: 5px auto;
+    top: 10px;
+    left: 0px;
+    right: 0px;
+    padding-left: 10px;
+}
+
+.adminOptions {
+    width: 120%;
+    left: -30px;
+}
+
+.adminOptions h4 {
+    color: #000;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 5px;
+}
+
+.adminOptions li {
+    cursor: pointer;
+    padding: 0px 5px;
+}
+
+.adminOptions li i {
+    margin-right: 10px;
+}
+
+.adminOptions li a {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.adminOptions li a:hover {
+    background-color: #ccc;
+}
+
+.addWorkerModalBody {
+    display: inline-block;
+}
+
+.addWorkerModalBody img {
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    width: 150px;
+}
+
+.addWorkerModalBody .input-group {
+    margin-bottom: 5px;
+}
+
+.addWorkerModalFooter button {
+    width: 100%;
+}
+
+.workerTable {
+    padding-top: 60px;
+}
+
+.workerTable h1 {
+    text-align: center;
+}
+
+.logOutBtn {
+    float: right;
+}
+
+.dropdown .dropdown-toggle {
+    padding: 0px 10px 0px 0px;
+}
+
+#allWorkers .modal-header {
+    text-align: center;
+}
+
+#allWorkers .modal-header input {
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: center;
+}
+
+#allWorkers .modal-body {
+    text-align: center;
+}
+
+#allWorkers .modal-body .card {
+    padding-top: 0px;
+    margin: 10px auto;
+    width: 100px;
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+#allWorkers .modal-body .card img {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    position: relative;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+#allWorkers .modal-body {
+    width: 800px;
+    height: 160px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    margin: 0 auto;
+    white-space: nowrap;
+    padding: 0px;
+}
+
+#allWorkers .modal-body .card h4 {
+    text-align: center;
+    margin: 5px auto;
+    font-size: 12px;
+    white-space: nowrap;
+    /* width: 12em; */
+    overflow: hidden;
+    height: 15px;
+    text-overflow: ellipsis;
+}
+
+#allWorkers .modal-footer h4 {
+    text-align: center;
+}
+
+#allWorkers .modal-footer .input-group {
+    margin-bottom: 5px;
+}
+
+.updateBtn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#workerInfoDiv h1 {
+    margin-top: 15px;
+}
+
+.noWorking {
+    opacity: 0.5;
+}
+
+.selectedImg {
+    display: none;
+    position: absolute !important;
+    height: 100%;
+    width: 100% !important;
+    z-index: 99 !important;
+    border-radius: 0px !important;
+}
+
+.buttonload {
+
+    float: right;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+}
+
+
+.bar {
+    overflow: hidden;
+    opacity: 0.8;
+    background: black;
+    position: absolute;
+    top: 0px;
+    height: auto;
+    z-index: 1;
+    width: 0px;
+    height: 140px;
+}
+
+.bar h2 {
+    margin-left: 60px;
+    color: #fff;
+    z-index: 9;
+    font-size: 18px;
+}
+
+.card .data img {
+    width: 50px;
+    top: 10px;
+    left: -25px;
+}
+
+.addApt {
+    position: absolute;
+    right: 210px;
+    top: 8px;
+}
+
+#nearestEmployeeAvailable {
+    margin-top: 10px;
+    height: 320px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.nearestEmployeeList {
+    border-top: 1px solid #ccc;
+    padding: 10px 10px;
+    cursor: pointer;
+    padding-left: 5px;
+    font-weight: bold;
+}
+
+.nearestEmployeeList:hover {
+    background-color: #ccc;
+}
+
+.nearestEmployeeList span {
+    float: right;
+}
+
+.modal-dialog {
+    margin: 0px auto;
+}
+
+.chatroom {
+    margin: 8px 0px;
+}
+
+#chat-room .nav-tabs li {
+    width: 50%;
+}
+
+#group_message {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#grpmsg .btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#allMessages {
+    width: 100%;
+    height: 300px;
+    background-color: #f1f1f1;
+    border: 1px solid #a1a1a1;
+    border-radius: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+#allMessages h5 {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+#allMessages h5 span {
+    position: absolute;
+    top: -8px;
+    margin: 0px auto;
+    left: 0px;
+    right: 0px;
+    width: 250px;
+    background-color: #f1f1f1;
+    text-align: center;
+    bottom: 0px;
+    height: 15px;
+}
+
+.workerList {
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    height: 320px;
+
+}
+
+#message_box {
+    height: 320px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: #f1f1f1;
+}
+
+#person_message {
+    margin-bottom: 10px;
+}
+
+#menu1 .btn {
+    width: 100%;
+}
+
+#workerList li {
+    border-bottom: 1px solid #ccc;
+    padding: 5px 5px;
+}
+
+#workerList li:hover {
+    cursor: pointer;
+    background-color: #f1f1f1;
+}
+
+#message_box h5 {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+#message_box h5 span {
+    position: absolute;
+    top: -8px;
+    margin: 0px auto;
+    left: 0px;
+    height: 15px;
+    right: 0px;
+    width: 250px;
+    background-color: #f1f1f1;
+    text-align: center;
+    bottom: 0px;
+}
+
+.amountToPaid {
+    color: #000 !important;
+    position: absolute;
+    right: -65px;
+    font-size: 20px;
+    top: 25px;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.dataTable {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.table > tbody > tr > td {
+    font-size: 13px;
+    text-align: center;
+}
+
+.table > thead > tr > th {
+    font-size: 13px;
+    text-align: center;
+}
+
+#multipleAppointments .modal-dialog {
+    width: 70%;
+}
+
+#id01 {
+    z-index: 9999;
+}
+
+.sendServerDataBtn {
+    float: right;
+}
+
+.thisIsDone {
+    background-color: #ccc !important;
+}
+
+.tableCol span {
+    margin-top: 6px;
+}
+
+.gen_btn {
+    position: absolute;
+    top: 15px;
+    right: 125px;
+}
+
+#newworkerList li {
+    border-bottom: 1px solid #ccc;
+    padding: 5px 5px;
+}
+
+#newworkerList li:hover {
+    cursor: pointer;
+    background-color: #f1f1f1;
+}
+
+#availabilityBox {
+    background-color: #f1f1f1;
+}
+
+
+.links {
+    margin-top: 50px;
+}
+
+.nav-tabs > li {
+    float: left;
+    margin-bottom: -1px;
+    width: 25%;
+    text-align: center;
+    height: 99px;
+}
+
+.nav-tabs > li > a {
+    height: 99px;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+    background-color: #ccc;
+    cursor: pointer;
+    color: #000;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+
+.nav-tabs > li > a > img {
+    display: block;
+    text-align: center;
+    margin: 0px auto;
+}
+
+#chat-room .nav-tabs > li > a {
+    height: 40px;
+}
+
+#chat-room .nav-tabs > li {
+    height: 40px;
+}
+
+#newWorkerForm h4 {
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.Certificates {
+    padding-top: 10px;
+}
+
+.Certificates li {
+    text-align: left;
+}
+
+.otherEmployeeType,
+.cnoInfo,
+.bankingInfo,
+.driveRange,
+.ppeInfo,
+.policeCheckInfo,
+.cprInfo,
+.workPermitInfo,
+.studyPermitInfo {
+    display: none;
+}
+
+#newWorkerForm .modal-dialog {
+    width: 70%;
+}
+
+.border-left {
+    border-left: 1px solid #ccc;
+}
+
+#allWorkers .modal-footer {
+    text-align: left;
+}
+
+#allWorkers .modal-dialog {
+    width: 90%;
+}
+
+#chat-room .modal-dialog {
+    width: 60%;
+}
+
+#nearestEmployeeAvailable li {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 10px 10px 10px;
+}
+
+#nearestEmployeeAvailable li:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+#workerAvailabilty .modal-dialog {
+    width: 70%;
+}
+
+#attendaceWorkerList {
+    height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+#attendaceWorkerList li {
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+}
+
+#attendaceWorkerList li:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+#attendance .modal-dialog {
+    width: 90%;
+}
+#attendance table thead tr{
+    text-align: center;
+}

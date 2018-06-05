@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Welcome Admin</title>
+    <meta charset="UTF-8">
+
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+
+    <script src="js/serverLinks.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/jsontoxls.js"></script>
+    <script src="js/controlWorker.js"></script>
+    <script src="js/calculateDistance.js"></script>
+    <script src="js/chatroom.js"></script>
+    <script src="js/workerAvailability.js"></script>
+    <script src="js/attendance.js"></script>
+
+    <script src="dist/shim.min.js"></script>
+    <script src="dist/xlsx.full.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+
+</head>
+
+<body>
+    <div class="loading">
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Admin Welcome</a>
+            </div>
+            <ul class="nav navbar-nav adminInfo">
+                <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown">
+              <img  src="https://www.volatour.com/images/productimg/img_avatar.png" width="50px">Welcome, Admin <span class="caret"></span></a>
+                    <ul class="dropdown-menu adminOptions">
+                        <h4>Appointments</h4>
+                        <li>
+                            <a onclick="addApptBtn()"><i class="glyphicon glyphicon-th-list"></i>Add Appointment</a>
+                        </li>
+                        <li>
+                            <a data-toggle="modal" data-target="#multipleAppointments"><i class="glyphicon glyphicon-download-alt"></i>Add Multiple Appointment</a>
+                        </li>
+
+                        <h4>Worker Info</h4>
+                        <li onclick="showWorkerList()">
+                            <a data-toggle="modal" data-target="#allWorkers"><i class="glyphicon glyphicon-user"></i>All Workers</a>
+                        </li>
+                        <li>
+                            <a data-toggle="modal" data-target="#newWorkerForm" onclcik="showAllWorkerModal()"><i class="glyphicon glyphicon-plus"></i>Add New Worker</a>
+                        </li>
+                        <li>
+                            <a data-toggle="modal" data-target="#workerAvailabilty" onclick="showWorkerAvailability()"><i class="glyphicon glyphicon-time"></i>Workers Availability</a>
+                        </li>
+                        <h4>Chat-Room</h4>
+                        <li>
+                            <a data-toggle="modal" data-target="#chat-room" type="button" onclick="chatroom()"><i class="glyphicon glyphicon-envelope"></i>Chat-Room</a>
+                        </li>
+
+                        <h4>Attendance</h4>
+                        <li>
+                            <a data-toggle="modal" data-target="#attendance" type="button" onclick="showEmplyeesForAttendance()"><i class="glyphicon glyphicon-file"></i>Attendance</a>
+                        </li>
+
+                        <h4>Log Out</h4>
+                        <li>
+                            <a onclick="signout()"><i class="glyphicon glyphicon-off"></i>Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+            <input type="text" id="searchWorker" placeholder="Search Worker" onkeyup="search(this)">
+        </div>
+    </nav>
+    <ul class="nav nav-tabs links">
+        <li class="active"><a data-toggle="tab" href="#Aquarius"><img src="images/logo.png" width="90px;">Aquarius</a></li>
+        <li><a data-toggle="tab" href="#Nu_Age"><img src="images/1.png" width="123px;">NU-AGE</a></li>
+        <li><a data-toggle="tab" href="#Haven"><img src="http://havenwellnesscenters.com/upload/logo/Haven_Logo_copy.png" width="70px;">HAVEN</a></li>
+        <li><a data-toggle="tab" href="#TrueWellness"><img src="images/true_wellness_logo.png" width="150px;" height="50">True Wellness</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="Aquarius" class="tab-pane fade in active">
+            <div class="workerTable">
+
+            </div>
+        </div>
+        <div id="Nu_Age" class="tab-pane fade">
+            <div class="workerTable">
+
+            </div>
+        </div>
+        <div id="Haven" class="tab-pane fade">
+            <div class="workerTable">
+
+            </div>
+        </div>
+        <div id="TrueWellness" class="tab-pane fade">
+            <div class="workerTable">
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="id01" class="modal">
+
+        <div class="modal-content animate">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span> Add <img src="https://www.volatour.com/images/productimg/img_avatar.png" alt="Avatar" class="avatar"> Appointment
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <label><b>Name</b></label>
+                        <input type="text" placeholder="Enter Name" required id="newAptName">
+                        <label><b>Address</b></label>
+                        <textarea type="text" placeholder="Enter Address" required id="newAptAddress"></textarea>
+                        <div class="timeDiv">
+                            <label><b>Start Date</b></label>
+                            <input type="date" placeholder="Enter Date" required id="newAptStartDate">
+                        </div>
+                        <div class="timeDiv">
+                            <label><b>Start Time</b></label>
+                            <input type="time" placeholder="Enter Time" required id="newAptStartTime">
+                        </div>
+                        <div class="timeDiv">
+                            <label><b>End Date</b></label>
+                            <input type="date" placeholder="Enter Date" required id="newAptEndDate">
+                        </div>
+                        <div class="timeDiv">
+                            <label><b>End Time</b></label>
+                            <input type="time" placeholder="Enter Time" required id="newAptEndTime">
+                        </div>
+                        <label><b>Appointment Description</b></label>
+                        <textarea type="textarea" placeholder="Description" required id="newAptDescription"></textarea>
+
+                        <button onclick="generateList()">Generate Employee List</button>
+
+                    </div>
+                    <div class="col-sm-4">
+                        <h4>Nearest Employee Available</h4>
+                        <div id="map-canvas"></div>
+                        <button onclick="sortList()">Sort</button>
+                        <ul id="nearestEmployeeAvailable">
+
+                        </ul>
+                        <input id="selectedWorker" type="text" placeholder="Select from above list !!" disabled="true">
+                    </div>
+                </div>
+                <button class="confirmAptBtn">Add Appointment</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Add New Worker Modal -->
+    <div class="modal fade" id="newWorkerForm" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add New Employee</h4>
+                </div>
+                <div class="modal-body addWorkerModalBody">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h4>Personal Information</h4>
+                            <img src="https://www.volatour.com/images/productimg/img_avatar.png" width="120px">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="workerName" type="text" class="form-control" placeholder="First Name" required>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="workerLastName" type="text" class="form-control" placeholder="Last Name" required>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="workerGender" class="form-control">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
+                      </select>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                <input id="workerContact" type="number" class="form-control" placeholder="Contact" required>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                <input id="workerEmergencyContact" type="number" class="form-control" placeholder="Emergency Contact" required>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input id="workerEmail" type="email" class="form-control" placeholder="Email" required>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-screenshot"></i></span>
+                                <input id="workerAddress" type="text" class="form-control" placeholder="Address" required>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                                <input id="workerSinNumber" type="number" class="form-control" placeholder="SIN-number" required>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input id="workerHireDate" type="text" class="form-control" placeholder="Hire Date" required onfocus="(this.type='date')">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="workerTransportation" class="form-control" onchange="selectDriveRange()">
+                        <option value="no_Vehicle">No Vehicle</option>
+                        <option value="has_Vehicle">Has Vehicle</option>
+                      </select>
+                            </div>
+                            <div class="input-group driveRange">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="driveRange" class="form-control" onchange="availableCno()">
+                        <option value="10Km">In 10 Km</option>
+                        <option value="50Km">In 50 Km</option>
+                        <option value="100Km">In 100 Km</option>
+                        <option value="Abywhere">Anywhere</option>
+                      </select>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input id="payRate" type="number" class="form-control" placeholder="Payrate / Hour ($/hour)" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 border-left">
+                            <h4>Employee Type</h4>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="workerWorkingPlace" class="form-control">
+                        <option value="Aquarius">Aquarius</option>
+                        <option value="Nu_Age">NU-AGE</option>
+                        <option value="Haven">HAVEN</option>
+                        <option value="TrueWellness">True Wellness</option>
+                      </select>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="workerType" class="form-control" onchange="employeeType()">
+                        <option value="staff_PSW">Staff/Nurse PSW</option>
+                        <option value="staff_RN">Staff/Nurse RN</option>
+                        <option value="staff_RPN">Staff/Nurse RPN</option>
+                        <option value="transportation">Transportation/Driving</option>
+                        <option value="administrator">Office/Administrator</option>
+                        <option value="manager">Manager</option>
+                        <option value="supervisor">Supervisor</option>
+                        <option value="on-call_person">On-call Person</option>
+                        <option value="others">Others</option>
+                      </select>
+                            </div>
+                            <div class="input-group otherEmployeeType">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input id="otherEmployeeType" type="text" class="form-control" placeholder="Employee Type" required>
+                            </div>
+                            <h4>Certificates</h4>
+                            <div class="Certificates">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <ul>
+                                            <li>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="workerCNO" class="form-control" onchange="availableCno()">
+                                            <option value="cno_no">CNO No</option>
+                                            <option value="cno_yes">CNO Yes</option>
+                                          </select>
+                                                </div>
+                                                <div class="input-group cnoInfo">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="cnoInfoNumber" type="number" class="form-control" placeholder="CNO Number" required>
+                                                </div>
+                                                <div class="input-group cnoInfo">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="cnoInfoExpiryDate" type="text" class="form-control" placeholder="CNO Expiry Date" required onfocus="(this.type='date')">
+                                                </div>
+                                            </li>
+                                            <li>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="workerPSW" class="form-control">
+                                            <option value="psw_no">PSW No</option>
+                                            <option value="psw_yes">PSW Yes</option>
+                                          </select>
+                                                </div>
+                                            </li>
+                                            <li>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="workerCPR" class="form-control" onchange="availableCpr()">
+                                            <option value="cpr_no">CPR No</option>
+                                            <option value="cpr_yes">CPR Yes</option>
+                                          </select>
+                                                </div>
+                                                <div class="input-group cprInfo">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="cprInfoNumber" type="number" class="form-control" placeholder="CPR Number" required>
+                                                </div>
+                                                <div class="input-group cprInfo">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="cprInfoExpiryDate" type="text" class="form-control" placeholder="CPR Expiry Date" required onfocus="(this.type='date')">
+                                                </div>
+                                            </li>
+                                            <li>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="workerPoliceCheck" class="form-control" onchange="availablePoliceCheck()">
+                                            <option value="police_check_no">Police-Check No</option>
+                                            <option value="police_check_yes">Police-Check Yes</option>
+                                          </select>
+                                                </div>
+                                                <div class="input-group policeCheckInfo">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="policeCheckInfo" type="text" class="form-control" placeholder="Police Check Expiry Date" required onfocus="(this.type='date')">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <ul>
+                                            <li>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="workerBankingInfo" class="form-control" onchange="bankingInfo()">
+                                            <option value="banking_info_no">Banking-Information No</option>
+                                            <option value="banking_info_yes">Banking-Information Yes</option>
+                                          </select>
+                                                </div>
+                                                <div class="input-group bankingInfo">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="bankingInfoInstitution" type="number" class="form-control" placeholder="Institution" required>
+                                                </div>
+                                                <div class="input-group bankingInfo">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="bankingInfoTransit" type="number" class="form-control" placeholder="Transit" required>
+                                                </div>
+                                                <div class="input-group bankingInfo">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="bankingInfoAccountNumber" type="number" class="form-control" placeholder="Account Number" required>
+                                                </div>
+                                            </li>
+                                            <li>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="workerCollegeDoc" class="form-control">
+                                            <option value="college_doc_no">College-Documents No</option>
+                                            <option value="college_doc_yes">College-Documents Yes</option>
+                                          </select>
+                                                </div>
+                                            </li>
+                                            <li>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="workerPPE" class="form-control" onchange="availablePpe()">
+                                            <option value="ppe_no">Personal-Protection(PPE) No</option>
+                                            <option value="ppe_yes">Personal-Protection(PPE) Yes</option>
+                                          </select>
+                                                </div>
+                                                <div class="input-group ppeInfo">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="ppeInfo" type="text" class="form-control" placeholder="PPE Expiry Date" required onfocus="(this.type='date')">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4>Requirements</h4>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="workerWorkPermit" class="form-control" onchange="availableWorkPermit()">
+                        <option value="workPermit_no">Work-Permit No</option>
+                        <option value="workPermit_yes">Work-Permit Yes</option>
+                      </select>
+                            </div>
+                            <div class="input-group workPermitInfo">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input id="workPermitInfoNumber" type="number" class="form-control" placeholder="Work-Permit Number" required>
+                            </div>
+                            <div class="input-group workPermitInfo">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input id="workPermitInfoExpiryDate" type="text" class="form-control" placeholder="Work-Permit Expiry Date" required onfocus="(this.type='date')">
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="workerStudyPermit" class="form-control" onchange="availableStudyPermit()">
+                        <option value="studyPermit_no">Study-Permit No</option>
+                        <option value="studyPermit_yes">Study-Permit Yes</option>
+                      </select>
+                            </div>
+                            <div class="input-group studyPermitInfo">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input id="studyPermitInfoNumber" type="number" class="form-control" placeholder="Study-Permit Number" required>
+                            </div>
+                            <div class="input-group studyPermitInfo">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input id="studyPermitInfoExpiryDate" type="text" class="form-control" placeholder="Study-Permit Expiry Date" required onfocus="(this.type='date')">
+                            </div>
+
+                            <h4>Photo ID</h4>
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="workerPassport" class="form-control">
+                        <option value="passport_id_no">Passport No</option>
+                        <option value="passport_id_yes">Passport Yes</option>
+                      </select>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="workerDriverLicense" class="form-control">
+                        <option value="driverLicense_id_no">Driver License No</option>
+                        <option value="driverLicense_id_yes">Driver License Yes</option>
+                      </select>
+                            </div>
+                            <h4>Any Restictions to Work</h4>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <textarea id="restrictionToWork" type="text" class="form-control" placeholder="Any Restictions to Work" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer addWorkerModalFooter">
+                    <button type="button" class="btn btn-success" onclick="createNewWorker()">Create</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- All Worker Modal -->
+    <div class="modal fade" id="allWorkers" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">All Worker Info</h4>
+                    <input type="text" placeholder="Search Workers" onkeyup="searchWorkers(this)">
+                </div>
+                <div class="modal-body" id="workerInfoDiv">
+
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h4 class="modal-title">Edit Info</h4>
+                            First Name
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="editWorkerName" type="text" class="form-control" placeholder="Name">
+                            </div>
+                            Last Name
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="editworkerLastName" type="text" class="form-control" placeholder="Last Name" required>
+                            </div>
+                            Gender
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="editworkerGender" class="form-control">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
+                      </select>
+                            </div>
+                            Contact
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                <input id="editWorkerContact" type="number" class="form-control" placeholder="Contact">
+                            </div>
+                            Emergency Contact
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                <input id="editworkerEmergencyContact" type="number" class="form-control" placeholder="Emergency Contact" required>
+                            </div>
+                            Email;
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input id="editWorkerEmail" type="email" class="form-control" placeholder="Email">
+                            </div>
+                            Address
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-screenshot"></i></span>
+                                <input id="editWorkerAddress" type="text" class="form-control" placeholder="Address">
+                            </div>
+                            Worker Status
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-trash"></i></span>
+                                <select id="editWorkerStatus" class="form-control">
+                        <option value="working">Working</option>
+                        <option value="no_more_working">No More Working</option>
+                      </select>
+                            </div>
+                            SIN Number
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                                <input id="editWorkerSinNumber" type="number" class="form-control" placeholder="SIN-number" required>
+                            </div>
+                            Hire Date
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input id="editworkerHireDate" type="text" class="form-control" placeholder="Hire Date" required onfocus="(this.type='date')">
+                            </div>
+                            Transportation
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="editWorkerTransportation" class="form-control">
+                        <option value="has_Vehicle">Has Vehicle</option>
+                        <option value="no_Vehicle">No Vehicle</option>
+                      </select>
+                            </div>
+                            Drive Range
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="editdriveRange" class="form-control">
+                        <option value="10Km">In 10 Km</option>
+                        <option value="50Km">In 50 Km</option>
+                        <option value="100Km">In 100 Km</option>
+                        <option value="Abywhere">Anywhere</option>
+                      </select>
+                            </div>
+                            Pay Rate
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input id="editpayRate" type="number" class="form-control" placeholder="Payrate / Hour ($/hour)" required>
+                            </div>
+
+                            Employee Type If Other
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input id="editotherEmployeeType" type="text" class="form-control" placeholder="Employee Type" required>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <h4>Certificates</h4>
+                            <div class="Certificates">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <ul>
+                                            <li>
+                                                CNO
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="editworkerCNO" class="form-control">
+                                            <option value="cno_yes">Yes</option>
+                                            <option value="cno_no">No</option>
+                                          </select>
+                                                </div>
+                                                CNO-Number
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="editcnoInfoNumber" type="number" class="form-control" placeholder="CNO Number" required>
+                                                </div>
+                                                CNO-Expiry Date
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="editcnoInfoExpiryDate" type="text" class="form-control" placeholder="CNO Expiry Date" required onfocus="(this.type='date')">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                PSW
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="editworkerPSW" class="form-control">
+                                            <option value="psw_yes">Yes</option>
+                                            <option value="psw_no">No</option>
+                                          </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                CPR
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="editworkerCPR" class="form-control">
+                                            <option value="cpr_yes">Yes</option>
+                                            <option value="cpr_no">No</option>
+                                          </select>
+                                                </div>
+                                                CPR-Number
+                                                <div class="input-group ">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="editcprInfoNumber" type="number" class="form-control" placeholder="CPR Number" required>
+                                                </div>
+                                                CPR-Expiry Date
+                                                <div class="input-group ">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="editcprInfoExpiryDate" type="text" class="form-control" placeholder="CPR Expiry Date" required onfocus="(this.type='date')">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                Police-Check
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="editworkerPoliceCheck" class="form-control">
+                                            <option value="police_check_yes">Yes</option>
+                                            <option value="police_check_no">No</option>
+                                          </select>
+                                                </div>
+                                                Police-Check Expiry Date
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="editpoliceCheckInfo" type="text" class="form-control" placeholder="Police Check Expiry Date" required onfocus="(this.type='date')">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <ul>
+                                            <li>
+                                                Banking-Information
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="editworkerBankingInfo" class="form-control">
+                                            <option value="banking_info_yes">Yes</option>
+                                            <option value="banking_info_no">No</option>
+                                          </select>
+                                                </div>
+                                                Banking-Information Institution
+                                                <div class="input-group ">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="editbankingInfoInstitution" type="number" class="form-control" placeholder="Institution" required>
+                                                </div>
+                                                Banking-Information Transit
+                                                <div class="input-group ">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="editbankingInfoTransit" type="number" class="form-control" placeholder="Transit" required>
+                                                </div>
+                                                Banking-Information Account Number
+                                                <div class="input-group ">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="editbankingInfoAccountNumber" type="number" class="form-control" placeholder="Account Number" required>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                College-Documents
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="editworkerCollegeDoc" class="form-control">
+                                            <option value="college_doc_yes">Yes</option>
+                                            <option value="college_doc_no">No</option>
+                                          </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                Personal-Protection(PPE)
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="editworkerPPE" class="form-control">
+                                            <option value="ppe_yes">Yes</option>
+                                            <option value="ppe_no">No</option>
+                                          </select>
+                                                </div>
+                                                PPE-Expiry Date
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                                    <input id="editppeInfo" type="text" class="form-control" placeholder="PPE Expiry Date" required onfocus="(this.type='date')">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                Passport
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="editworkerPassport" class="form-control">
+                                            <option value="passport_id_no">Passport No</option>
+                                            <option value="passport_id_yes">Passport Yes</option>
+                                          </select>
+                                                </div>
+                                                License
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                                    <select id="editworkerDriverLicense" class="form-control">
+                                            <option value="driverLicense_id_no">Driver License No</option>
+                                            <option value="driverLicense_id_yes">Driver License Yes</option>
+                                          </select>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <h4>Employee Type</h4>
+                            Employee Place
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="editworkerWorkingPlace" class="form-control">
+                        <option value="Aquarius">Aquarius</option>
+                        <option value="Nu_Age">NU-AGE</option>
+                        <option value="Haven">HAVEN</option>
+                        <option value="TureWellness">True Wellness</option>
+                      </select>
+                            </div>
+                            Employee Type
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="editworkerType" class="form-control" onchange="employeeType()">
+                        <option value="staff_PSW">Staff/Nurse PSW</option>
+                        <option value="staff_RN">Staff/Nurse RN</option>
+                        <option value="staff_RPN">Staff/Nurse RPN</option>
+                        <option value="transportation">Transportation/Driving</option>
+                        <option value="administrator">Office/Administrator</option>
+                        <option value="manager">Manager</option>
+                        <option value="supervisor">Supervisor</option>
+                        <option value="on-call_person">On-call Person</option>
+                        <option value="others">Others</option>
+                      </select>
+                            </div>
+                            <h4>Requirements</h4>
+                            Work Permit
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="editworkerWorkPermit" class="form-control" onchange="availableWorkPermit()">
+                            <option value="workPermit_no">Work-Permit No</option>
+                            <option value="workPermit_yes">Work-Permit Yes</option>
+                          </select>
+                            </div>
+                            Work Permit-Number
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input id="editworkPermitInfoNumber" type="number" class="form-control" placeholder="Work-Permit Number" required>
+                            </div>
+                            Work Permit-Expiry Date
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input id="editworkPermitInfoExpiryDate" type="text" class="form-control" placeholder="Work-Permit Expiry Date" required onfocus="(this.type='date')">
+                            </div>
+                            Study Permit
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-transfer"></i></span>
+                                <select id="editworkerStudyPermit" class="form-control" onchange="availableStudyPermit()">
+                            <option value="studyPermit_no">Study-Permit No</option>
+                            <option value="studyPermit_yes">Study-Permit Yes</option>
+                          </select>
+                            </div>
+                            Study Permit-Number
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input id="editstudyPermitInfoNumber" type="number" class="form-control" placeholder="Study-Permit Number" required>
+                            </div>
+                            Study Permit-Expiry Date
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input id="editstudyPermitInfoExpiryDate" type="text" class="form-control" placeholder="Study-Permit Expiry Date" required onfocus="(this.type='date')">
+                            </div>
+                            <h4>Any Restictions to Work</h4>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <textarea id="editrestrictionToWork" type="text" class="form-control" placeholder="Any Restictions to Work" required></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-qrcode"></i></span>
+                        <input id="workerUniqueKey" type="text" class="form-control" placeholder="Unique Worker Key" disabled>
+                    </div>
+                    <button id="updateBtn" type="button" class="btn btn-success updateBtn" onclick="updateWorker(this)">Update</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <!-- Chat-room Modal -->
+    <div class="modal fade" id="chat-room" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">CHAT-ROOM</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#grpmsg">Group Message</a></li>
+                        <li><a data-toggle="tab" href="#menu1">Message</a></li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div id="grpmsg" class="tab-pane fade in active">
+                            <div id="allMessages"></div>
+                            <input id="group_message" type="text" class="form-control" placeholder="Enter Message">
+
+                            <button type="button" class="btn btn-success" onclick="sendMessage()">Send Message</button>
+                        </div>
+
+                        <div id="menu1" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="workerList">
+                                        <ul id="workerList">
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div id="message_box"></div>
+                                </div>
+                            </div>
+                            <input id="person_message" type="text" class="form-control" placeholder="Enter Message">
+                            <button type="button" class="btn btn-success msgSendBtn" onclick="sendMessageToPerson(this)">Send Message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Multiple Appointments Modal -->
+    <div class="modal fade" id="multipleAppointments" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Multiple Appointments</h4>
+                </div>
+                <div class="modal-body">
+                    <!--<input type="file" name="xlfile" id="xlf" />-->
+                    <input type="file" name="xlfile" id="xlf" />
+                    <input type="checkbox" name="useworker" checked><input type="checkbox" name="userabs" checked>
+                    <div class="dataTable">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Client Name</th>
+                                    <th>Addesss</th>
+                                    <th>Contact</th>
+                                    <th>Appointment Date</th>
+                                    <th>Appointment Time</th>
+                                    <th>Add Appointment</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clientDetails">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Worker Availability Modal -->
+    <div class="modal fade" id="workerAvailabilty" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Workers Availability </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="workerList">
+                                <ul id="newworkerList">
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-9">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Monday</th>
+                                        <th>Tuesday</th>
+                                        <th>Wednesday</th>
+                                        <th>Thrusday</th>
+                                        <th>Friday</th>
+                                        <th>Excel File</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="availabilityBox">
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Attendance Modal -->
+    <div class="modal fade" id="attendance" role="dialog">
+        <div class="modal-dialog" style="width: 90%;">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Workers Attendance</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="workerList">
+                                <ul id="attendaceWorkerList">
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-9">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr style="text-align: center;">
+                                        <td>Date</td>
+                                        <td>Status</td>
+                                        <td>In-Time</td>
+                                        <td>In-Location</td>
+                                        <td>Out-Time</td>
+                                        <td>Out-Location</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="attendanceBox">
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+    </script>
+    <script src="js/gettingExcel.js"></script>
+
+
+
+
+
+</body>
+
+</html>
